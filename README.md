@@ -44,17 +44,26 @@ Use it (or let Claude pick it up from the skill description) when you:
 
 ## Repository layout
 
+`SKILL.md` is deliberately self-sufficient for a routine turn — the loop,
+the compressed eight-rule protocol (citation keys only), teaching moves,
+hard rules, and file schemas — so a normal question costs one small
+`learner/model.md` read on top of it. The reference file is the on-demand
+evidence base; the token-economy rationale (and its own small verified
+bibliography) is in its Design note.
+
 ```
-SKILL.md                      entry point: the loop, teaching moves, hard rules
+SKILL.md                      entry point, self-sufficient per turn: the
+                              loop, the eight rules (compressed), teaching
+                              moves, hard rules, learner-file schemas
 references/
-  adaptive-teaching.md        the full protocol: two-tier design, file
-                              schemas, the learner loop's learning-science
-                              grounding, the eight-rule answer-style
-                              protocol, honest limits, and two verified
+  adaptive-teaching.md        on-demand evidence base: two-tier design,
+                              learning-science grounding, full rule
+                              rationale, honest limits, verified
                               bibliographies
-learner/                      personal, gitignored: the verbatim question
-                              log and the consolidated learner model the
-                              loop maintains for this installation's user
+learner/                      personal, gitignored: consolidated model
+                              (model.md), live unconsolidated log tail
+                              (question-log.md), and the verbatim archive
+                              of absorbed entries (question-log-archive.md)
 ```
 
 The `learner/` tier is deliberately split from the tracked files: what the

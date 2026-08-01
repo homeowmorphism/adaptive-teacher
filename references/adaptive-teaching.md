@@ -1,132 +1,51 @@
-# Adaptive teaching — the learner loop and the answer style
+# Adaptive teaching — the evidence base
 
-This file is the full protocol behind SKILL.md's "learner loop" section: how
-clarifying questions update a persistent learner model, and how answers to
-those questions are written. The second half is the **answer-style protocol**
-— the evidence-based rules for composing a maximally clear chat answer —
-with its own verified bibliography.
+**Load policy: this file is not read on a routine Q&A turn.** `SKILL.md`
+is operationally self-sufficient — the loop, the eight rules, the teaching
+moves, and the file schemas all live there. Load this file only when:
 
-Scope note: this file governs the *conversation* — what to do when the user
-asks a question, in the moment and across sessions — in any domain. The
-protocol was distilled inside the `mathlib-definition` skill (whose
-example-sheet reference governs that skill's teaching *artifact*, a
-contrasting-cases `.lean` file); the worked examples below keep that
-origin's flavor, but nothing in the rules is domain-specific.
+- the user asks for the evidence behind a rule, or challenges the protocol;
+- a full citation (venue, DOI, effect size, caveat) must be quoted;
+- the protocol or a bibliography is being amended — the one workflow where
+  web searches and verification passes are permitted.
+
+Scope note: the protocol governs the *conversation* — what to do when the
+user asks a question, in the moment and across sessions — in any domain. It
+was distilled inside the `mathlib-definition` skill; the worked examples
+keep that origin's flavor, but nothing in the rules is domain-specific.
+
+## Design note — token economy (2026-08-01 restructure)
+
+The operational checklist was inlined into `SKILL.md` and this file demoted
+to on-demand evidence, on the strength of the LLM-context literature:
+instruction prompts tolerate heavy compression with little performance loss
+(Jiang et al. 2023, "LLMLingua", EMNLP, up to 20×; Pan et al. 2024,
+"LLMLingua-2", Findings of ACL, 2–5× task-agnostic); reasoning performance
+degrades as input length grows even when the relevant content is held
+constant (Levy, Jacoby & Goldberg 2024, "Same Task, More Tokens", ACL); and
+material in the middle of a long context is used worst (Liu et al. 2024,
+"Lost in the Middle", TACL 12:157–173) — the pre-restructure layout put the
+eight rules mid-file behind 23 KB of bibliography. The bibliographies below
+are the skill's paid-for asset: they exist for building and verifying the
+protocol, not for composing a routine answer, and are no longer re-paid per
+question.
 
 ## The two-tier design
 
 What the skill learns splits by whom it is about:
 
 - **`learner/` (personal, gitignored, never committed)** — what the skill
-  knows *about this user*: the verbatim question log and the consolidated
-  learner model. Private to the installation.
+  knows *about this user*: the verbatim question log (live tail plus
+  archive) and the consolidated learner model. Private to the installation.
 - **`references/` (tracked, committed)** — what the user's questions reveal
-  about *the skill's own text*: a missing prerequisite, an explanation anyone
-  would stumble on, a dangling pointer. These are defects; fix the reference
-  file and commit, citing the log entry date in the commit message.
+  about *the skill's own text*: a missing prerequisite, an explanation
+  anyone would stumble on, a dangling pointer. These are defects; fix the
+  reference file and commit, citing the log entry date in the commit
+  message.
 
 The learner model is an **open** model: the user may read, correct, or edit
 `learner/` at any time, and substantive new inferences are surfaced to the
 user for confirmation before they harden into "knows well" entries.
-
-## The files and their schemas
-
-First use: `learner/` is gitignored, so a fresh clone does not ship it. If
-the directory is missing, create both files from the templates below before
-proceeding — an empty log and a model whose sections are empty except for
-clearly labeled initial priors, if any.
-
-### `learner/question-log.md` — append-only, verbatim
-
-Every clarifying question asked while the skill is active gets an entry,
-appended in the same turn it is answered. The question is quoted *verbatim* —
-the citation discipline applies to the user's words too. Entries are never
-rewritten or deleted; consolidation happens in `model.md`, which links back.
-
-```markdown
-## YYYY-MM-DD · <phase or context> · <diagnosis tag>
-Q: "<the question, verbatim>"
-Diagnosis: <which gap the question reveals — missing prerequisite /
-  explanation pitched at the wrong level / terminology gap / genuine open
-  question / skill-text defect>
-Resolved by: <the explanation or demonstration that visibly resolved it —
-  what actually worked, not what was tried first>
-Anticipate: <the rule for next time — what to preempt, and where>
-Retrieval: no | yes — "<one-line prompt to re-ask later>"
-```
-
-Diagnosis tags are descriptive, never evaluative: they name the gap between
-the explanation and the reader, not a deficiency in the reader. Header tags
-are free-form with one exception: when the diagnosis is a defect in the
-skill's own text, the tag is the verbatim string `skill-text defect` —
-consolidation greps for exactly that string to route the committed fix.
-
-Brevity contract (user cost feedback, 2026-08-01): an entry targets ≤6
-lines — the verbatim question, a one-line diagnosis, a one-line
-what-worked, and an anticipation clause only when it changes future
-behavior. Log only questions that teach the model something. The whole loop
-is file appends plus one small read per session — never agents, web
-searches, or verification passes; those are reserved for building or
-amending §Bibliography, a one-time cost already paid.
-
-### `learner/model.md` — consolidated, read first
-
-Read at every invocation, before answering anything. Five sections, each
-with its own evidence discipline:
-
-- **Knows well — stop explaining.** Entries move here only after evidence:
-  fluent use, a correct unprompted paraphrase, or explicit confirmation —
-  never after a single non-question. Material here is skipped or compressed;
-  re-explaining it costs attention (expertise reversal, §Answer style rule 4).
-- **Active gaps.** Each links the log entries that revealed it. A gap closes
-  when a retrieval prompt or later usage shows it resolved. Single-datum
-  gaps are marked as such and not hardened.
-- **Question patterns → anticipation rules.** Promoted after ≥2 related log
-  entries. Each rule names where to preempt: answer prose, a comment or
-  docstring in the artifact being built, an exercise's wording, or a
-  reference-file fix.
-- **Explanation styles — what works, what doesn't.** Evidence-pinned
-  observations about which register resolved this user's questions fastest.
-- **Retrieval queue.** Dated, not session-counted — sessions are irregular
-  and the spacing evidence is about elapsed time. Each prompt carries a due
-  date and a recall tally. Schedule: first re-ask at least a day out, then
-  ~a week, then ~a month; retire after two clean recalls; a failed recall
-  gets a re-explanation and a reset to due-tomorrow. At most ONE due prompt
-  is posed per session, at a natural pause, always skippably. (Grounding:
-  §Why the learner loop, the three retrieval bullets.)
-
-Every model claim must pin to a dated log entry; a claim with no log evidence
-is labeled a guess.
-
-The model opens with a `Consolidated through:` line naming the last log
-entry it has absorbed. At invocation, if `question-log.md` holds entries
-newer than that line, consolidate them before the first answer — the
-catch-up path for sessions that ended without consolidating. Template (also what to
-create on first use):
-
-```markdown
-# Learner model (personal — not tracked by git)
-
-Consolidated through: <date · context of last absorbed entry, or "nothing yet">
-
-## Knows well — stop explaining
-## Active gaps
-## Question patterns → anticipation rules
-## Explanation styles — what works, what doesn't
-## Retrieval queue
-(entry format: `due YYYY-MM-DD · "<prompt>" · from <log date> · recalls n/2`)
-```
-
-### The loop, per turn and per session
-
-1. **At invocation**: read `learner/model.md`; if the log holds entries
-   newer than its `Consolidated through:` line, consolidate them first; then
-   apply its skips, preemptions, and (at most one) due retrieval prompt.
-2. **On each clarifying question**: diagnose → answer per the answer-style
-   protocol below → append the log entry, same turn.
-3. **Consolidate** before session end or every ~3 new entries: update
-   `model.md` from the log; commit any reference-file fixes the entries
-   revealed. `learner/` itself is never committed.
 
 ## Why the learner loop — the learning-science grounding
 
@@ -142,7 +61,10 @@ Each element of the loop instantiates a verified finding (full citations in
   (Wood, Bruner & Ross 1976). The computational precedent is knowledge
   tracing: a persistent per-skill estimate of what the student has learned,
   used to decide what to present next (Corbett & Anderson 1995). Hence
-  `learner/model.md`, read first at every invocation.
+  `learner/model.md`, read first at every invocation — and kept compact:
+  knowledge tracing's runtime state is the consolidated estimate, while the
+  interaction trace is audit data, which is why absorbed log entries rotate
+  to an archive never read at runtime.
 - **Questions localize the frontier of knowledge.** Question asking peaks
   where a learner's knowledge meets the material — "to ask a question, one
   must know enough to know what is not known" (Miyake & Norman 1979; an
@@ -212,9 +134,9 @@ Each element of the loop instantiates a verified finding (full citations in
   Teaching behavior in LLMs is trainable and steerable as "pedagogical
   instruction following" (LearnLM Team 2024), and is properly evaluated on
   pedagogical dimensions — adapting to the learner, checking understanding —
-  not answer quality alone (Jurenka et al. 2024). This file *is* the
-  pedagogical instruction; the learner model is what makes it per-user and
-  cross-session.
+  not answer quality alone (Jurenka et al. 2024). The skill's instructions
+  *are* the pedagogical instruction; the learner model is what makes them
+  per-user and cross-session.
 
 **Honest bounds.** No published study tests this exact mechanism — logging a
 learner's clarifying questions into a cross-session model is an
@@ -230,13 +152,12 @@ scaffolding studies are small and observational (Wood & Middleton 1975 is
 correlational, 12 dyads; Wood, Bruner & Ross 1976 is descriptive, no
 control condition).
 
-## The answer-style protocol
+## The answer-style protocol — full statement and grounding
 
-Eight rules for composing the reply to a clarifying question, ordered as a
-checklist: shape (1–3), content (4–5), depth (6), form (7), close (8). Each
-carries its grounding (full citations in §Bibliography — answer style) and
-its transfer caveat. The evidence is strong on direction and weak on
-magnitude (§Honest limits); when rules pull against each other, rule 4
+The operational checklist lives in `SKILL.md`; this is the full statement
+of each rule with its grounding and transfer caveats (citations in
+§Bibliography — answer style). The evidence is strong on direction and weak
+on magnitude (§Honest limits); when rules pull against each other, rule 4
 arbitrates through the learner model.
 
 1. **Answer first, with the axis it turns on.** The opening one or two
@@ -784,3 +705,28 @@ Feedback, interactivity, and the close:
   doi:10.1057/s41599-026-07019-z. 35 experiments, 4,193 participants:
   overall g = 0.670 on learning outcomes, moderated by duration and
   subject.
+
+## Bibliography — design note (LLM context economy; verified 2026-08-01, the two ACL/TACL entries re-checked against the ACL Anthology)
+
+- Jiang, H., Wu, Q., Lin, C.-Y., Yang, Y., & Qiu, L. (2023). LLMLingua:
+  Compressing prompts for accelerated inference of large language models.
+  *Proceedings of EMNLP 2023*, 13358–13376. doi:10.18653/v1/2023.emnlp-main.825.
+  Coarse-to-fine prompt compression achieved up to 20× compression with
+  little performance loss.
+- Pan, Z., Wu, Q., Jiang, H., et al. (2024). LLMLingua-2: Data distillation
+  for efficient and faithful task-agnostic prompt compression. *Findings of
+  ACL 2024*, 963–981. doi:10.18653/v1/2024.findings-acl.57. Task-agnostic
+  token-classification compressor; 2–5× compression, 1.6×–2.9× end-to-end
+  speedup, small accuracy deltas.
+- Levy, M., Jacoby, A., & Goldberg, Y. (2024). Same task, more tokens: The
+  impact of input length on the reasoning performance of large language
+  models. *Proceedings of ACL 2024*, 15339–15353.
+  doi:10.18653/v1/2024.acl-long.818. Reasoning degrades as inputs lengthen
+  even with the relevant content held constant, well below the technical
+  context maximum.
+- Liu, N. F., Lin, K., Hewitt, J., Paranjape, A., Bevilacqua, M., Petroni,
+  F., & Liang, P. (2024). Lost in the middle: How language models use long
+  contexts. *Transactions of the Association for Computational
+  Linguistics*, 12, 157–173. doi:10.1162/tacl_a_00638. Accuracy is highest
+  when relevant information sits at the beginning or end of the context and
+  degrades significantly mid-context, even for long-context models.
