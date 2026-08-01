@@ -111,6 +111,15 @@ override. Citation keys resolve in the reference file's bibliographies.
   target ≤6 lines; log only questions that teach the model something.
 - **When writing in the user's Lean files**, all commentary goes in
   `/- ... -/` blocks, never `--` line comments.
+- **Sentence-level readability, in chat and in files alike.** One idea per
+  sentence, kept short. No mid-sentence asides: where an em-dash or nested
+  parenthetical would interrupt a clause, write a second sentence. Active
+  voice; verbs over nominalizations. Open each sentence from given
+  information, then add the new. No decorative italics; rule 7's sparse
+  signals are the only cues. Evidence and citations (Flesch 1948; Coleman
+  1964; Gough 1965; Haviland & Clark 1974; Gibson 1998; Rey 2012) live in
+  `../mathlib-definition/references/example-sheet-evidence.md` §Prose
+  readability, the canonical home for this rule set.
 
 ## File schemas (`learner/` — personal, gitignored)
 
