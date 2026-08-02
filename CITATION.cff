@@ -10,6 +10,7 @@ authors:
   - family-names: Su
     given-names: Hang Lu
     alias: homeowmorphism
+    orcid: "https://orcid.org/0009-0009-8050-4164"
 abstract: >-
   A domain-general Claude Code skill for being taught. It answers clarifying
   questions using an eight-rule, evidence-based answer-style protocol, treats
