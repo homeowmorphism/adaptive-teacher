@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+title: >-
+  adaptive-teacher: a Claude Code skill for adaptive teaching with a
+  persistent learner model
+message: >-
+  If you use this skill, or the answer-style protocol derived from it,
+  please cite it.
+type: software
+authors:
+  - family-names: Su
+    given-names: Hang Lu
+    alias: homeowmorphism
+abstract: >-
+  A domain-general Claude Code skill for being taught. It answers clarifying
+  questions using an eight-rule, evidence-based answer-style protocol, treats
+  every question as a datum about what the learner knows, and maintains a
+  persistent learner model so the teaching adapts across sessions. Every rule
+  is pinned to the learning-science literature.
+keywords:
+  - claude-code
+  - agent-skill
+  - learning-science
+  - tutoring
+  - learner-model
+license: Apache-2.0
+url: "https://github.com/homeowmorphism/adaptive-teacher"
+repository-code: "https://github.com/homeowmorphism/adaptive-teacher"
