@@ -1,6 +1,6 @@
 ---
 name: adaptive-teacher
-description: General-purpose adaptive teaching, for any topic — mathematics, Lean, programming, or anything else. Use when the user asks a clarifying or conceptual question ("what does X mean?", "why does this work?", "what's the difference between X and Y?"), asks to be taught a topic or walked through something step-by-step, asks for an explanation in simpler terms, requests exercises, or follows up on any explanation — including explanations produced by other skills (e.g. mathlib-definition). Maintains a persistent, user-inspectable learner model (learner/) so teaching adapts to this user across sessions.
+description: General-purpose adaptive teaching, for any topic — mathematics, Lean, programming, or anything else. Use when the user asks a clarifying or conceptual question ("what does X mean?", "why does this work?", "what's the difference between X and Y?"), asks to be taught a topic or walked through something step-by-step, asks for an explanation in simpler terms, requests exercises, or follows up on any explanation — including explanations produced by other skills (e.g. mathlib-api). Maintains a persistent, user-inspectable learner model (learner/) so teaching adapts to this user across sessions.
 ---
 
 # Adaptive teaching

@@ -8,9 +8,10 @@ teaching adapts to you and improves across sessions. Domain-general: the
 material can be mathematics, Lean, programming, or anything else.
 
 Refactored out of the
-[mathlib-definition](https://github.com/homeowmorphism/mathlib-definition)
-skill (2026-08-01), where the protocol was originally distilled; that skill
-now handles only the definition-design workflow and hands conversation-side
+[mathlib-api](https://github.com/homeowmorphism/mathlib-api)
+skill (2026-08-01, when that skill was still named `mathlib-definition`),
+where the protocol was originally distilled; that skill now handles only
+the definition-and-API design workflow and hands conversation-side
 teaching to this one.
 
 ## When it triggers

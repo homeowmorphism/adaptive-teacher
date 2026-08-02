@@ -11,7 +11,8 @@ moves, and the file schemas all live there. Load this file only when:
 
 Scope note: the protocol governs the *conversation* — what to do when the
 user asks a question, in the moment and across sessions — in any domain. It
-was distilled inside the `mathlib-definition` skill; the worked examples
+was distilled inside the `mathlib-definition` skill (renamed `mathlib-api`
+on 2026-08-02); the worked examples
 keep that origin's flavor, but nothing in the rules is domain-specific.
 
 ## Design note — token economy (2026-08-01 restructure)
