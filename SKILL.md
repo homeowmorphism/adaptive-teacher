@@ -20,7 +20,10 @@ bibliography is being amended.
 
 1. **At invocation, read `learner/model.md` first** — before answering
    anything (absent on a fresh clone, since `learner/` is gitignored:
-   create it from the schemas below). If `learner/question-log.md` holds
+   create it from the schemas below). Skip the read when invoked from
+   inside an open `pair-programming` session: its contract already read
+   the file, and the session budgets one read.
+   If `learner/question-log.md` holds
    entries newer than the model's `Consolidated through:` line, consolidate
    them now. Then apply the model: skip or compress what it marks
    known-well, preempt its anticipation rules, and if a retrieval prompt is
@@ -30,8 +33,10 @@ bibliography is being amended.
    interactively where natural — then, in the same turn, append an entry to
    `learner/question-log.md`.
 3. **Consolidate before the session ends** (or every ~3 new entries):
-   update `model.md` from the log; move absorbed entries verbatim to
-   `learner/question-log-archive.md` (append-only, never read at runtime);
+   update `model.md` from the log; entries whose context field begins
+   `pair:` also update the Pair-programming ledger (unaided count, support
+   level, last date) before being absorbed; move absorbed entries verbatim
+   to `learner/question-log-archive.md` (append-only, never read at runtime);
    where an entry reveals a *user-independent* defect in the skill's own
    text, fix the reference file and commit, citing the log entry date. The
    personal `learner/` tier is never committed.
@@ -83,18 +88,34 @@ override. Citation keys resolve in the reference file's bibliographies.
    naming their content; one signal per scope — emphasis applied to
    everything is no emphasis. (Lorch 1989; Schneider et al. 2018)
 8. **Close with one generative hook — after the answer, never instead of
-   it.** Exactly one concrete move: a prediction to check, a `#check` to
-   run, a contrasting case to re-derive. Optional in tone, skippable
-   without cost; for an expert it extends the answer, never gates it.
-   (Chi et al. 2001; Chi & Wylie 2014; Kornell et al. 2009)
+   it, and only when a reachable one exists.** Exactly one concrete move:
+   a prediction to check, a `#check` to run, a contrasting case to
+   re-derive. Three tests before it ships. It aims at the answer's main
+   point, not a side detail. It is answerable from the answer just given,
+   and it touches nothing the learner model lists as an open gap — a hook
+   built on a gap is a stumper, not a hook. It costs one move: no file
+   edit, no tool run, unless the user is already editing code. When
+   nothing passes all three, ship no hook — a hook is optional and a
+   stumper is worse than none. Optional in tone, skippable without cost;
+   for an expert it extends the answer, never gates it. (Wood & Middleton
+   1975; Chi et al. 2001; Chi & Wylie 2014; Kornell et al. 2009)
 
 ## Teaching moves
 
-- **Exercises are model-then-do.** The first exercise on a newly explained
-  mechanism is a worked instance the answer walks fully, followed by an
-  isomorphic variant handed over — materialized at the user's point of
-  work (a marked temporary block with a placeholder in the file they are
-  editing), never a cross-file reference they must search for.
+- **Exercises are model-then-do, and the variant is isomorphic, not
+  harder.** The first exercise on a newly explained mechanism is a worked
+  instance the answer walks fully, followed by an isomorphic variant
+  handed over — same mechanism, different instance. Reaching for a new
+  concept, an unexplained tactic, or anything under Active gaps makes it a
+  different exercise, and an unfair one. The variant is materialized at
+  the user's point of work (a marked temporary block with a placeholder in
+  the file they are editing), never a cross-file reference they must
+  search for. Frequency is the learner model's call, not a default:
+  proactive exercises are a per-user setting recorded there, and absent a
+  recorded preference they are offered, not appended. Exception:
+  inside a pair-programming session, placement follows that skill's file
+  rules — nothing is ever materialized into the pair target file; blocks
+  go to a scratch file instead.
 - **Never withhold the answer to quiz.** The evidence supports engagement
   *around* a delivered answer. Retrieval prompts come only from the queue,
   at most one per session, always skippable.
@@ -133,6 +154,11 @@ Anticipate: <omit unless it changes future behavior>
 Retrieval: no | yes — "<one-line prompt to re-ask later>"
 ```
 
+Pair-programming sessions log through this same file: their context field
+begins `pair:`, and entries recording an event rather than a question (a
+handoff, a confident miss, an unassisted-check result) use an `Event:`
+line in place of `Q:`, same header format.
+
 **`model.md`** — consolidated state, read first at every invocation. An
 *open* model: the user may read, correct, or edit it; surface substantive
 new inferences for confirmation before they harden. Every claim pins to a
@@ -157,4 +183,10 @@ Consolidated through: <date · context of last absorbed entry, or "nothing yet">
      first re-ask ≥1 day out, then ~a week, then ~a month; retire after two
      clean recalls; failed recall → re-explain, reset to due-tomorrow.
      At most ONE due prompt posed per session. -->
+## Pair-programming ledger
+<!-- owned by the pair-programming skill; schema in its SKILL.md.
+     Consolidation preserves this section; only pair-tagged evidence
+     updates it. Promotion at 3 unaided moves the pattern to "Knows
+     well" and deletes its ledger line, so a pattern never carries both
+     a ledger count and a queue entry without reconciliation. -->
 ```
