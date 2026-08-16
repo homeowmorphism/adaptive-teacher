@@ -26,8 +26,10 @@ bibliography is being amended.
    If `learner/question-log.md` holds
    entries newer than the model's `Consolidated through:` line, consolidate
    them now. Then apply the model: skip or compress what it marks
-   known-well, preempt its anticipation rules, and if a retrieval prompt is
-   due, pose at most one, at a natural pause, skippably.
+   known-well, preempt its anticipation rules, and if retrieval prompts are
+   due, pose one batch of up to three at a natural pause, skippable as a
+   unit — most-overdue first, no two from the same topic cluster, and a
+   prompt whose parent gap has reached "Knows well" retires unposed.
 2. **Every clarifying question is a diagnostic datum.** Diagnose the gap
    *before* answering, compose the answer by the eight rules below, close
    interactively where natural — then, in the same turn, append an entry to
@@ -35,7 +37,13 @@ bibliography is being amended.
 3. **Consolidate before the session ends** (or every ~3 new entries):
    update `model.md` from the log; entries whose context field begins
    `pair:` also update the Pair-programming ledger (unaided count, support
-   level, last date) before being absorbed; move absorbed entries verbatim
+   level, last date) before being absorbed; `Event:` entries recording
+   unaided correct use of a queued mechanism advance that queue entry one
+   recall (an observed recall — retrieval the work already paid for);
+   consolidation keeps `model.md` within ~300 lines by merging overlapping
+   rules and compressing resolved material, since the model is re-read
+   every session and long contexts degrade the reading (evidence: the
+   reference file's design note); move absorbed entries verbatim
    to `learner/question-log-archive.md` (append-only, never read at runtime);
    where an entry reveals a *user-independent* defect in the skill's own
    text, fix the reference file and commit, citing the log entry date. The
@@ -118,7 +126,7 @@ override. Citation keys resolve in the reference file's bibliographies.
   go to a scratch file instead.
 - **Never withhold the answer to quiz.** The evidence supports engagement
   *around* a delivered answer. Retrieval prompts come only from the queue,
-  at most one per session, always skippable.
+  at most one batch of three per session, always skippable.
 
 ## Hard rules
 
@@ -157,7 +165,9 @@ Retrieval: no | yes — "<one-line prompt to re-ask later>"
 Pair-programming sessions log through this same file: their context field
 begins `pair:`, and entries recording an event rather than a question (a
 handoff, a confident miss, an unassisted-check result) use an `Event:`
-line in place of `Q:`, same header format.
+line in place of `Q:`, same header format. Any session logs an `Event:`
+when the user applies a queued mechanism unaided and correctly — an
+observed recall, credited at consolidation.
 
 **`model.md`** — consolidated state, read first at every invocation. An
 *open* model: the user may read, correct, or edit it; surface substantive
@@ -180,9 +190,21 @@ Consolidated through: <date · context of last absorbed entry, or "nothing yet">
 ## Explanation styles — what works, what doesn't
 ## Retrieval queue
 <!-- `due YYYY-MM-DD · "<prompt>" · from <log date> · recalls n/2` —
-     first re-ask ≥1 day out, then ~a week, then ~a month; retire after two
-     clean recalls; failed recall → re-explain, reset to due-tomorrow.
-     At most ONE due prompt posed per session. -->
+     spacing: ≥1 day, then ~a week, then ~a month; retire after two clean
+     spaced recalls; failed recall → re-explain, reset to due-tomorrow.
+     A clean recall is explicit (posed prompt answered) or observed (an
+     Event: logging unaided correct use in real work); both count the
+     same, and observed ones are free.
+     Per session: ONE batch of ≤3 due prompts at one natural pause,
+     skippable as a unit; most-overdue first (cheap proxy for lowest
+     retrievability); no two prompts from the same topic cluster
+     (interleave confusables, don't block them); a prompt whose parent
+     gap reached "Knows well" retires unposed. Overdue is a priority key,
+     never a debt — nothing stacks.
+     Admission: recurrence evidence (≥2 log entries) or current-project
+     critical path; single-datum curiosities stay under Active gaps.
+     Hard cap 12 — on overflow, merge isomorphic prompts, then move the
+     lowest-recurrence entries to the archive under a dated heading. -->
 ## Pair-programming ledger
 <!-- owned by the pair-programming skill; schema in its SKILL.md.
      Consolidation preserves this section; only pair-tagged evidence

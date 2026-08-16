@@ -119,6 +119,39 @@ Each element of the loop instantiates a verified finding (full citations in
   Hence the queue schedule, in elapsed time because that is what the
   evidence measures: at least a day, then ~a week, then ~a month, retired
   after two clean recalls.
+- **Optimize learning, not the session's performance.** Fluency during
+  and right after an explanation is a biased index of durable learning:
+  the conditions that speed acquisition are often the ones that fail
+  retention, and learners' own judgments track performance, not learning
+  (Soderstrom & Bjork 2015). The eight rules govern the session; the
+  queue owns durability; both goals are met only if the queue actually
+  cycles. The desirable-difficulties frame carries its own boundary — a
+  difficulty is desirable only when the learner can succeed with effort —
+  which this skill's per-user log can and did establish empirically (the
+  2026-08-03 hook-difficulty revocation).
+- **Schedule by predicted forgetting, not arrival order.** Review that
+  adapts to per-item, per-learner forgetting beat both massed and
+  one-size-fits-all spaced review in a semester-long classroom experiment,
+  time-matched (+16.5% and +10.0% on the cumulative exam; Lindsey et al.
+  2014). Industrial-scale schedulers reach the same design by fitting
+  per-item forgetting curves (Settles & Meeder 2016; Ye, Su & Cao 2022),
+  and the optimal-control analysis concludes review effort should
+  concentrate on items closest to being forgotten (Tabibian et al. 2019).
+  The queue imports the heuristic core at zero compute: pose the
+  most-overdue prompt first — longest-overdue is the cheap proxy for
+  lowest current retrievability.
+- **Batch small, interleave, and credit real use.** One correct recall
+  per session across a few widening sessions — successive relearning — is
+  the best durability-per-minute schedule and holds in authentic courses
+  (Rawson & Dunlosky 2011; Rawson, Dunlosky & Sciartelli 2013): hence one
+  small batch per session, never a review block. Within a batch,
+  interleave: mixing items beats blocking them, with the benefit
+  concentrated on high-similarity discriminations (Brunmair & Richter
+  2019) — tactic and notation confusions are the paradigm case. And an
+  unaided correct use of a queued mechanism during real work is a
+  retrieval event the session already paid for — logged as an observed
+  recall, it advances the item at zero token cost (umbrella review:
+  Carpenter, Pan & Butler 2022).
 - **Retrieval strengthens what was practiced — claim no more.** Transfer
   from retrieval practice exists but is conditional (d = 0.40 overall,
   robust with elaborated feedback and high initial success, weak or absent
@@ -151,7 +184,15 @@ high heterogeneity — implementation design, not model access, decides the
 outcome (Han, Peng & Liu 2025: SMD = 0.45, I² = 95%). The foundational
 scaffolding studies are small and observational (Wood & Middleton 1975 is
 correlational, 12 dyads; Wood, Bruner & Ross 1976 is descriptive, no
-control condition).
+control condition). Two bounds on the 2026-08-16 scheduling amendment:
+the observed-recall credit is an extrapolation — the retrieval-practice
+corpus tests explicit prompted recall, never in-context use counted as a
+review event, so the mechanism (retrieval is retrieval) is sound but the
+protocol is untested; and the adaptive-scheduling results (Lindsey et al.
+2014; Settles & Meeder 2016; Ye, Su & Cao 2022; Tabibian et al. 2019) come
+from flashcard-scale systems fitting thousands of item-level observations
+per learner — this skill imports only their priority heuristic
+(most-overdue ≈ closest to forgotten), not their fitted memory models.
 
 ## The answer-style protocol — full statement and grounding
 
@@ -446,6 +487,56 @@ Retrieval practice and spacing:
   710–756. doi:10.1037/bul0000151. Transfer d = 0.40 vs restudy, but
   conditional — robust with elaborated retrieval and high initial success,
   weak or absent for untested material.
+
+Durability scheduling and the learning–performance distinction (added and
+verified 2026-08-16 against publisher/ACL Anthology/ACM DL records):
+
+- Soderstrom, N. C., & Bjork, R. A. (2015). Learning versus performance:
+  An integrative review. *Perspectives on Psychological Science*, 10(2),
+  176–199. doi:10.1177/1745691615569000. Current performance is an
+  unreliable index of learning; manipulations that speed acquisition
+  (massing, blocking, low variation) often depress retention and transfer,
+  and vice versa; learners' judgments track performance, not learning.
+- Rawson, K. A., Dunlosky, J., & Sciartelli, S. M. (2013). The power of
+  successive relearning: Improving performance on course exams and
+  long-term retention. *Educational Psychology Review*, 25(4), 523–548.
+  doi:10.1007/s10648-013-9240-4. Recall to criterion plus spaced
+  relearning sessions, embedded in an authentic course, improved exam
+  performance and long-term retention over business-as-usual studying.
+- Lindsey, R. V., Shroyer, J. D., Pashler, H., & Mozer, M. C. (2014).
+  Improving students' long-term knowledge retention through personalized
+  review. *Psychological Science*, 25(3), 639–647.
+  doi:10.1177/0956797613504302. Semester-long middle-school experiment,
+  time-matched: personalized spaced review +16.5% on a cumulative exam
+  over massed review and +10.0% over one-size-fits-all spaced review.
+- Settles, B., & Meeder, B. (2016). A trainable spaced repetition model
+  for language learning. *Proceedings of ACL 2016*, 1848–1858.
+  doi:10.18653/v1/P16-1174. Half-life regression fits per-item forgetting
+  curves from Duolingo-scale logs, improving recall prediction and
+  engagement; an engineering objective at flashcard scale.
+- Ye, J., Su, J., & Cao, Y. (2022). A stochastic shortest path algorithm
+  for optimizing spaced repetition scheduling. *Proceedings of KDD '22*,
+  4381–4390. doi:10.1145/3534678.3539081. Casts scheduling as minimizing
+  expected review cost to reach a memorization target over a fitted
+  memory model; basis of the open-source FSRS scheduler family.
+- Tabibian, B., Upadhyay, U., De, A., Zarezade, A., Schölkopf, B., &
+  Gomez-Rodriguez, M. (2019). Enhancing human learning via spaced
+  repetition optimization. *PNAS*, 116(10), 3988–3993.
+  doi:10.1073/pnas.1815156116. Optimal-control result: optimal reviewing
+  intensity is proportional to the item's current forgetting rate —
+  review what is closest to being forgotten; validated on Duolingo data.
+- Brunmair, M., & Richter, T. (2019). Similarity matters: A meta-analysis
+  of interleaved learning and its moderators. *Psychological Bulletin*,
+  145(11), 1029–1052. doi:10.1037/bul0000209. Interleaving g = 0.42
+  overall, concentrated on high-similarity materials where discrimination
+  is the task; for word-based materials blocking won (g = −0.39) —
+  interleave confusables, not arbitrary mixtures.
+- Carpenter, S. K., Pan, S. C., & Butler, A. C. (2022). The science of
+  effective learning with spacing and retrieval practice. *Nature Reviews
+  Psychology*, 1(9), 496–511. doi:10.1038/s44159-022-00089-1. Umbrella
+  review across domains and settings; both techniques are underused
+  because counter-intuitive — in-session performance misleads learners
+  about what is working.
 
 LLM tutoring, 2024–2026:
 
